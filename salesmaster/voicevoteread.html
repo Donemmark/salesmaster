@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Read Out Options</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    .options-list {
+        list-style-type: none;
+        padding: 0;
+        text-align: left;
+    }
+
+    .option-item {
+        margin-bottom: 10px;
+        font-size: 18px;
+    }
+
+    .read-button {
+        padding: 10px 20px;
+        font-size: 18px;
+        cursor: pointer;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        outline: none;
+        margin-top: 20px;
+    }
+
+    .read-button:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Read Out Options</h2>
+    
+    <p>List of options:</p>
+    <ul class="options-list">
+        <li class="option-item">Option 1: Lorem ipsum dolor sit amet.</li>
+        <li class="option-item">Option 2: Consectetur adipiscing elit.</li>
+        <li class="option-item">Option 3: Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</li>
+    </ul>
+
+    <button class="read-button" onclick="readOptions()">Read Options</button>
+</div>
+
+<script>
+    function readOptions() {
+        const optionsList = document.querySelectorAll('.option-item');
+        const textToRead = Array.from(optionsList).map(item => item.textContent).join('. ');
+        
+        if ('speechSynthesis' in window) {
+            const speech = new SpeechSynthesisUtterance();
+            speech.lang = 'en-US';
+            speech.text = textToRead;
+            
+            speechSynthesis.speak(speech);
+        } else {
+            alert('Speech synthesis is not supported in your browser.');
+        }
+    }
+</script>
+
+</body>
+</html>
